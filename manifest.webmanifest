@@ -1,0 +1,25 @@
+{
+  "name": "Al-Ibadah — Come Back to God",
+  "short_name": "Al-Ibadah",
+  "description": "Quran, hadith, duas and prayer times in Bangla and English. Free, ad-free, supported by sadaqah.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#EFE7D8",
+  "theme_color": "#14332A",
+  "lang": "bn",
+  "dir": "ltr",
+  "categories": ["books", "education", "lifestyle"],
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Prayer times", "url": "/prayer-times" },
+    { "name": "Quran", "url": "/quran" },
+    { "name": "Hadith", "url": "/hadith" }
+  ]
+}

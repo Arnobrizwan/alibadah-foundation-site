@@ -1,0 +1,44 @@
+{
+  "quran-manuscript": {
+    "file": "/images/quran-manuscript.jpg",
+    "title": "Birmingham Quran manuscript",
+    "artist": "AnonymousUnknown author",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Birmingham%20Quran%20manuscript.jpg"
+  },
+  "sixty-dome-mosque": {
+    "file": "/images/sixty-dome-mosque.jpg",
+    "title": "Sixty Dome Mosque 2022 View",
+    "artist": "Faisal Photography",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sixty%20Dome%20Mosque%202022%20View.jpg"
+  },
+  "baitul-mukarram": {
+    "file": "/images/baitul-mukarram.jpg",
+    "title": "Baitul Mukarram National Mosque,Dhaka 168",
+    "artist": "Frameofashik",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Baitul%20Mukarram%20National%20Mosque%2CDhaka%20168.jpg"
+  },
+  "star-mosque": {
+    "file": "/images/star-mosque.jpg",
+    "title": "Star Mosque",
+    "artist": "Roger Gwynn",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Star%20Mosque.jpg"
+  },
+  "kaaba": {
+    "file": "/images/kaaba.jpg",
+    "title": "The Kaaba during Hajj - edited",
+    "artist": "Adli Wahid\n\nMinor modifications made by Basile Morin, from the original version.",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:The%20Kaaba%20during%20Hajj%20-%20edited.jpg"
+  },
+  "masjid-nabawi": {
+    "file": "/images/masjid-nabawi.jpg",
+    "title": "Al-Masjid an Nabawi",
+    "artist": "Meshari Alawfi",
+    "license": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Al-Masjid%20an%20Nabawi.jpg"
+  }
+}

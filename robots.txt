@@ -1,0 +1,8 @@
+# Al-Ibadah
+User-agent: *
+Allow: /
+
+# Search result pages add nothing to the index.
+Disallow: /*?q=
+
+Sitemap: https://alibadahfoundation.com/sitemap.xml

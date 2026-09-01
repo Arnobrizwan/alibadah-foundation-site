@@ -1,0 +1,1 @@
+import{u}from"./query-Dqvp_yA-.js";import{F as r}from"./index-CKtiUT8-.js";function s(){return u({queryKey:["dua-categories"],queryFn:r.getCategories,staleTime:1/0})}function i(e){return u({queryKey:["duas",e],queryFn:()=>r.getDuas(e),staleTime:5*60*1e3})}export{i as a,s as u};
