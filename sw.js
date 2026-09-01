@@ -1,11 +1,16 @@
 // Al-Ibadah service worker.
 //
-// The app shell is precached so the site opens without a connection. API
-// responses use stale-while-revalidate: the cached copy renders immediately
-// and is refreshed in the background. Prayer times are deliberately excluded —
+// The app shell is precached so the site opens without a connection. Content
+// uses stale-while-revalidate: the cached copy renders immediately and is
+// refreshed in the background. Prayer times are deliberately excluded —
 // a stale prayer time is worse than no prayer time.
 
-const VERSION = 'al-ibadah-v1';
+// Stamped by scripts/stamp-service-worker.mjs after the build, from a hash of
+// the build output. It must change whenever the output does: the activate
+// handler drops every cache that does not match, and a frozen version means a
+// returning visitor is never given anything newer than their first visit.
+const BUILD_ID = 'c2004012c585';
+const VERSION = `al-ibadah-${BUILD_ID.startsWith('__') ? 'dev' : BUILD_ID}`;
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 
@@ -32,6 +37,13 @@ self.addEventListener('activate', (event) => {
 const isLiveEndpoint = (url) =>
   url.pathname.startsWith('/api/prayers') || url.pathname.startsWith('/api/mosques');
 
+// The static export under /data/ is content, not an asset: `surahs.json` and
+// `content.json` keep the same name every build, so the cache-first branch
+// below would pin a visitor to whatever they downloaded on their first visit
+// and no correction would ever reach them.
+const isContent = (url) =>
+  url.pathname.startsWith('/api/') || url.pathname.startsWith('/data/');
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
@@ -40,19 +52,24 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   if (isLiveEndpoint(url)) return;
 
-  // Content API — stale-while-revalidate.
-  if (url.pathname.startsWith('/api/')) {
+  // Content — stale-while-revalidate.
+  if (isContent(url)) {
+    const revalidate = caches.open(DATA_CACHE).then(async (cache) => {
+      const response = await fetch(request);
+      if (response.ok) await cache.put(request, response.clone());
+      return response;
+    });
+
+    // waitUntil is what makes this stale-WHILE-REVALIDATE rather than just
+    // stale: once the cached copy is returned the worker is free to be killed,
+    // and the refresh would be cancelled before it ever reached the cache.
+    event.waitUntil(revalidate.catch(() => {}));
+
     event.respondWith(
-      caches.open(DATA_CACHE).then(async (cache) => {
-        const cached = await cache.match(request);
-        const network = fetch(request)
-          .then((response) => {
-            if (response.ok) cache.put(request, response.clone());
-            return response;
-          })
-          .catch(() => cached);
-        return cached ?? network;
-      }),
+      caches
+        .open(DATA_CACHE)
+        .then((cache) => cache.match(request))
+        .then((cached) => cached ?? revalidate),
     );
     return;
   }
@@ -63,7 +80,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets — cache first; filenames are content-hashed.
+  // Static assets — cache first. Safe only because Vite content-hashes these
+  // filenames; anything with a stable name belongs in isContent above.
   event.respondWith(
     caches.match(request).then(
       (cached) =>
