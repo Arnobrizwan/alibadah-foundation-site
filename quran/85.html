@@ -4,16 +4,22 @@
     <meta name="generator" data-prerendered="true" content="scripts/prerender-routes.mjs" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>আল-বুরূজ · Al-Ibadah</title>
-    <meta name="description" content="মাক্কী · ২২ আয়াতসমূহ" />
+    <title>সূরা আল-বুরূজ (৮৫) — বাংলা অনুবাদ, তিলাওয়াত ও অর্থ · Al-Ibadah</title>
+    <meta name="description" content="সূরা আল-বুরূজ সম্পূর্ণ পড়ুন — ২২টি আয়াত আরবি, বাংলা অনুবাদ ও অর্থসহ, সঙ্গে তিলাওয়াত অডিও। মাক্কী সূরা।" />
     <meta name="author" content="Al-Ibadah" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#14332A" />
+    <!-- Single tag on purpose: the reader's own day/night choice overrides the
+         system scheme, so the inline script and useTheme both write this one. -->
+    <meta name="theme-color" content="#EFE7D8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Al-Ibadah" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="apple-mobile-web-app-title" content="আল-ইবাদাহ" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- The homepage asks Aladhan for prayer times before React has painted. -->
+    <link rel="preconnect" href="https://api.aladhan.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Only the weights the design actually uses. The full set of four
          families at every weight was 463 KB of woff2 on first load. -->
@@ -22,32 +28,47 @@
       rel="stylesheet"
     />
     <link rel="canonical" href="https://alibadahfoundation.com/quran/85" />
-    <link rel="alternate" hreflang="bn" href="https://alibadahfoundation.com/quran/85" />
-    <link rel="alternate" hreflang="en" href="https://alibadahfoundation.com/quran/85" />
-    <link rel="alternate" hreflang="x-default" href="https://alibadahfoundation.com/quran/85" />
 
     <!-- Social scrapers do not run JavaScript, so these defaults matter; the
          Seo component refines them per route for crawlers that do. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Al-Ibadah" />
     <meta property="og:url" content="https://alibadahfoundation.com/quran/85" />
-    <meta property="og:title" content="আল-বুরূজ · Al-Ibadah" />
-    <meta property="og:description" content="মাক্কী · ২২ আয়াতসমূহ" />
+    <meta property="og:title" content="সূরা আল-বুরূজ (৮৫) — বাংলা অনুবাদ, তিলাওয়াত ও অর্থ · Al-Ibadah" />
+    <meta property="og:description" content="সূরা আল-বুরূজ সম্পূর্ণ পড়ুন — ২২টি আয়াত আরবি, বাংলা অনুবাদ ও অর্থসহ, সঙ্গে তিলাওয়াত অডিও। মাক্কী সূরা।" />
     <meta property="og:image" content="https://alibadahfoundation.com/images/quran-manuscript.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="bn_BD" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="আল-বুরূজ · Al-Ibadah" />
-    <meta name="twitter:description" content="মাক্কী · ২২ আয়াতসমূহ" />
+    <meta name="twitter:title" content="সূরা আল-বুরূজ (৮৫) — বাংলা অনুবাদ, তিলাওয়াত ও অর্থ · Al-Ibadah" />
+    <meta name="twitter:description" content="সূরা আল-বুরূজ সম্পূর্ণ পড়ুন — ২২টি আয়াত আরবি, বাংলা অনুবাদ ও অর্থসহ, সঙ্গে তিলাওয়াত অডিও। মাক্কী সূরা।" />
     <meta name="twitter:image" content="https://alibadahfoundation.com/images/quran-manuscript.jpg" />
-  <script type="module" crossorigin src="/assets/index-C1H-PdPq.js"></script>
+    <script>
+      // Applied before React mounts. Doing this in an effect meant a night-mode
+      // reader saw a full-brightness parchment flash on every page load.
+      (function () {
+        try {
+          var stored = localStorage.getItem('al-ibadah-theme');
+          var night =
+            stored === 'night' ||
+            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (night) document.documentElement.classList.add('theme-night');
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', night ? '#0C1712' : '#EFE7D8');
+        } catch (e) {
+          /* storage blocked — the default light theme still renders */
+        }
+      })();
+    </script>
+  <script type="module" crossorigin src="/assets/index-y8xOUEN_.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/react-BbtcK2CM.js">
   <link rel="modulepreload" crossorigin href="/assets/query-Dqvp_yA-.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-ROSo2lBD.css">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://alibadahfoundation.com/#organization","name":"Al-Ibadah","alternateName":"আল-ইবাদাহ","url":"https://alibadahfoundation.com","logo":"https://alibadahfoundation.com/favicon.svg","slogan":"Come Back to God"},{"@type":"WebSite","@id":"https://alibadahfoundation.com/#website","url":"https://alibadahfoundation.com","name":"Al-Ibadah","inLanguage":["bn","en"],"publisher":{"@id":"https://alibadahfoundation.com/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://alibadahfoundation.com/quran?q={search_term_string}"},"query-input":"required name=search_term_string"}}]}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"হোম","item":"https://alibadahfoundation.com/"},{"@type":"ListItem","position":2,"name":"আল-বুরূজ","item":"https://alibadahfoundation.com/quran/85"}]}</script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CRTPgB6U.css">
+    <script type="application/ld+json" data-seo="site">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://alibadahfoundation.com/#organization","name":"Al-Ibadah","alternateName":"আল-ইবাদাহ","url":"https://alibadahfoundation.com","logo":"https://alibadahfoundation.com/favicon.svg","slogan":"Come Back to God"},{"@type":"WebSite","@id":"https://alibadahfoundation.com/#website","url":"https://alibadahfoundation.com","name":"Al-Ibadah","inLanguage":["bn","en"],"publisher":{"@id":"https://alibadahfoundation.com/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://alibadahfoundation.com/quran?q={search_term_string}"},"query-input":"required name=search_term_string"}}]}</script>
+    <script type="application/ld+json" data-seo="breadcrumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"হোম","item":"https://alibadahfoundation.com/"},{"@type":"ListItem","position":2,"name":"আল কোরআন","item":"https://alibadahfoundation.com/quran"},{"@type":"ListItem","position":3,"name":"আল-বুরূজ","item":"https://alibadahfoundation.com/quran/85"}]}</script>
+    <script type="application/ld+json" data-seo="page">{"@context":"https://schema.org","@type":"Article","headline":"সূরা আল-বুরূজ (৮৫) — বাংলা অনুবাদ, তিলাওয়াত ও অর্থ","description":"সূরা আল-বুরূজ সম্পূর্ণ পড়ুন — ২২টি আয়াত আরবি, বাংলা অনুবাদ ও অর্থসহ, সঙ্গে তিলাওয়াত অডিও। মাক্কী সূরা।","inLanguage":"bn","isPartOf":{"@type":"Book","name":"Al-Quran","alternateName":"আল কোরআন"},"articleSection":"আল-বুরূজ"}</script>
   </head>
   <body>
     <div id="root"></div>

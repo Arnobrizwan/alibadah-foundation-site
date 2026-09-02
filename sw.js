@@ -9,7 +9,7 @@
 // the build output. It must change whenever the output does: the activate
 // handler drops every cache that does not match, and a frozen version means a
 // returning visitor is never given anything newer than their first visit.
-const BUILD_ID = 'a222a33c77f5';
+const BUILD_ID = '4e057b38e409';
 const VERSION = `al-ibadah-${BUILD_ID.startsWith('__') ? 'dev' : BUILD_ID}`;
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
@@ -17,9 +17,14 @@ const DATA_CACHE = `${VERSION}-data`;
 const SHELL = ['/', '/index.html', '/favicon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(SHELL_CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()),
-  );
+  // No skipWaiting here. Activating over a live tab deletes the caches holding
+  // the assets that tab is still using, and its next lazily-loaded route chunk
+  // 404s. The new worker waits; main.tsx tells it when to take over.
+  event.waitUntil(caches.open(SHELL_CACHE).then((cache) => cache.addAll(SHELL)));
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'skip-waiting') self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -37,12 +42,17 @@ self.addEventListener('activate', (event) => {
 const isLiveEndpoint = (url) =>
   url.pathname.startsWith('/api/prayers') || url.pathname.startsWith('/api/mosques');
 
-// The static export under /data/ is content, not an asset: `surahs.json` and
-// `content.json` keep the same name every build, so the cache-first branch
-// below would pin a visitor to whatever they downloaded on their first visit
-// and no correction would ever reach them.
+// Anything whose filename is stable across builds is content, not an asset:
+// `surahs.json`, `content.json` and every file under /images/ keep the same
+// name every build, so the cache-first branch below would pin a visitor to
+// whatever they downloaded on their first visit and no correction — a fixed
+// translation, a replaced photograph — would ever reach them.
 const isContent = (url) =>
-  url.pathname.startsWith('/api/') || url.pathname.startsWith('/data/');
+  url.pathname.startsWith('/api/') ||
+  url.pathname.startsWith('/data/') ||
+  url.pathname.startsWith('/images/') ||
+  url.pathname === '/og-image.jpg' ||
+  url.pathname === '/manifest.webmanifest';
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
