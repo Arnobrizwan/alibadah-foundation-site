@@ -13,10 +13,10 @@ Free, ad-free, funded by sadaqah.
 
 | | |
 |---|---|
-| Quran | 114 surahs, 6,236 ayahs in Arabic with Bangla and English translation, ten reciters, search, bookmarks, hifz mode |
+| Quran | 114 surahs, 6,236 ayahs in Arabic; five Bangla translations and three Bangla tafsirs; ten reciters, search, bookmarks, hifz mode |
 | Hadith | 36,432 narrations across 8 collections and 395 books |
 | Duas | Morning and evening adhkar and the duas of daily life, by category |
-| Prayer | Times for 12 Bangladeshi cities, qibla, monthly timetable, Ramadan sehri and iftar |
+| Prayer | Times for all 64 districts (Karachi method, Hanafi Asr), qibla, monthly timetable, Ramadan sehri and iftar |
 | Assistant | `/ask` — worship, fiqh and daily-life answers retrieved on-device, no model and no API key |
 | Tools | Zakat calculator, tasbih, Hijri calendar, mosque finder, quiz, planner, charity tracker |
 | Guides | Learn salah, learn Quran, hajj and umrah, marriage, janazah |
@@ -27,8 +27,11 @@ Bangla is the default language throughout; English is a toggle.
 
 React 18, Vite, TypeScript, Tailwind, React Query and react-router — exported to a
 **fully static build with no runtime backend**. The corpus ships as JSON under
-`data/`; prayer times and qibla come from Aladhan and mosque search from
-OpenStreetMap, both straight from the browser.
+`data/`; prayer times and qibla come from Aladhan, mosque search from OpenStreetMap,
+and the extra Bangla translations and tafsir from the Quran Foundation API, all
+straight from the browser. Each degrades to nothing rather than to an error — the
+bundled Muhiuddin Khan translation and the Arabic are always present, so the reader
+works with no connection at all.
 
 All 141 sitemap routes are **prerendered** to real HTML files, each with its own
 title, description, canonical and JSON-LD, rather than relying on the Pages 404
