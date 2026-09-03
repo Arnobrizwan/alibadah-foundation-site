@@ -9,7 +9,7 @@
 // the build output. It must change whenever the output does: the activate
 // handler drops every cache that does not match, and a frozen version means a
 // returning visitor is never given anything newer than their first visit.
-const BUILD_ID = '4e057b38e409';
+const BUILD_ID = 'e42c540c80e2';
 const VERSION = `al-ibadah-${BUILD_ID.startsWith('__') ? 'dev' : BUILD_ID}`;
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
